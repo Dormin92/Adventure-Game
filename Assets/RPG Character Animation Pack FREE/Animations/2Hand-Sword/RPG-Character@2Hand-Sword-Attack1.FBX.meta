@@ -773,16 +773,18 @@ ModelImporter:
       curves: []
       events:
       - time: 0.38814995
-        functionName: Hit
+        functionName: StartHitFrames
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 236e3dc16f36f484a9980bb3ed493b7c,
+          type: 3}
         floatParameter: 0
-        intParameter: 1
+        intParameter: 0
         messageOptions: 0
       - time: 0.45011565
-        functionName: Hit
+        functionName: EndHitFrames
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 236e3dc16f36f484a9980bb3ed493b7c,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

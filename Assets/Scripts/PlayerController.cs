@@ -2,32 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10;
     public float turnSpeed = 1;
+    public Collider swordHitCollider;
 
-    private bool swordActiveFrames = false;
-    // Start is called before the first frame update
+
+    private bool ActiveFrames = false;
+
     void Start()
     {
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 rotation = new Vector3(0f, (Input.GetAxis("Turning") * turnSpeed * Time.deltaTime), 0f);
         transform.Rotate(rotation);
 
-        if(swordActiveFrames)
-            Debug.Log("Hitframes!");
+        if (ActiveFrames)
+        {
+            Collider[] cols = Physics.OverlapBox(swordHitCollider.bounds.center, swordHitCollider.bounds.extents, swordHitCollider.transform.rotation, LayerMask.GetMask("HittableBody"));
+            foreach(Collider c in cols)
+            {
+                if(c.tag == "Enemy")
+                {
+                    c.gameObject.GetComponent<EnemyController>().GetHit(10);
+                    StartCoroutine(EnemyInvincibilityFrames(c.gameObject));
+                }
+            }
+        }
     }
 
-    void Hit(int activation)
+    //Method is called by animation events
+    void StartHitFrames()
     {
-        if (activation == 1)
-            swordActiveFrames = true;
-        else
-            swordActiveFrames = false;
+        ActiveFrames = true;
+    }
+
+    void EndHitFrames()
+    {
+        ActiveFrames = false;
+    }
+
+    IEnumerator EnemyInvincibilityFrames(GameObject enemy)
+    {
+        enemy.gameObject.layer = 0;
+        yield return new WaitForSeconds(0.2f);
+        enemy.gameObject.layer = 8;
     }
 }
