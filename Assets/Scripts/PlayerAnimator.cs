@@ -17,6 +17,12 @@ public class PlayerAnimator : MonoBehaviour
         float speed = Input.GetAxis("ForwardBack");
         Animator.SetFloat("Speed", speed);
 
+        float strafe = Input.GetAxis("LeftRight");
+        Animator.SetFloat("LeftRight", strafe);
+
+        bool sprint = Input.GetButton("Sprint");
+        Animator.SetBool("Run", sprint);
+
         if (Input.GetMouseButtonDown(0))
             Animator.SetTrigger("Attack");
     }
