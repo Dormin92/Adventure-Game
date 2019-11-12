@@ -16,9 +16,9 @@ public class Selector : Node
     // Selectors only return FAILURE if all of it's children return FAILURE
     public override NodeStates Evaluate()
     {
-        foreach(Node n in childNodes)
+        foreach (Node n in childNodes)
         {
-            switch(n.Evaluate())
+            switch (n.Evaluate())
             {
                 case NodeStates.FAILURE:
                     continue;
